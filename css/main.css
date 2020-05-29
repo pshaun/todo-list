@@ -7,7 +7,8 @@ body{
     display: grid;
     grid:
         "header header header header" auto
-        "...... lists active ....." auto /
+        "...... lists active ....." auto 
+        "footer footer footer footer" auto/
         1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
 
 }
@@ -131,6 +132,13 @@ form{
     position: relative;
 }
 
+.todo-footer{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
 [type="checkbox"]{
     opacity: 0;
     position: absolute;
@@ -156,12 +164,13 @@ form{
 
 .task {
     position: relative;
+    white-space: wrap;
 }
 
 .custom-checkbox{
     display: inline-block;
-    width: 0.75em;
-    height: 0.75em;
+    width: 22px;
+    height: 22px;
     border: 2px solid currentColor;
     border-radius: 50%;
     cursor: pointer;
@@ -191,34 +200,39 @@ form{
     position: absolute;
     left: 1.5em;
     right:0;
-    height: 3px;
-    background: black;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 150ms ease-in-out;
+
 }
 
-[type="checkbox"]:checked + label::after{
-    transform: scaleX(1);
-    transform-origin: left;
+@keyframes strike {
+    from { text-decoration-color: transparent; }
+    to { text-decoration-color: auto; }
 }
 
-.delete-task{
-    display: flex;
-    justify-content: space-evenly;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: -65px;
-    color: white;
+[type="checkbox"]:checked + label{
+    text-decoration: line-through;
+    animation: strike 0.2s linear;
 }
 
 .btn.delete{
     font-weight: 600;
-    opacity: 0.7;
     font-size: 1rem;
+    color: rgba(0, 0, 0, 0.479);
+
 }
 
 .btn.delete:hover{
+    color: rgb(150, 18, 18);
+    font-weight: 700;
+}
+
+.btn.clear{
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.479);
+
+}
+
+.btn.clear:hover{
     color: rgb(0, 0, 0);
+    font-weight: 700;
 }
